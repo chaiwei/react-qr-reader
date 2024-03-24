@@ -37,13 +37,13 @@ You can install this library via NPM or YARN.
 ### NPM
 
 ```bash
-npm i react-qr-reader
+npm i @chaiwei/react-qr-reader
 ```
 
 ### YARN
 
 ```bash
-yarn add react-qr-reader
+yarn add @chaiwei/react-qr-reader
 ```
 
 ## Example Usage
