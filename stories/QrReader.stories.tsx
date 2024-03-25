@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
-import { Story } from '@storybook/react';
+// import { Story } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 
 import { ViewFinder } from './ViewFinder';
 
-import { QrReader } from '../dist/esm';
-import { QrReaderProps } from '../dist';
+import { QrReader } from '../src';
+import { QrReaderProps } from '../src/types';
+import { Result } from '@zxing/library';
+
+
 
 const styles = {
   container: {
@@ -13,16 +17,16 @@ const styles = {
   },
 };
 
-const Template: Story<QrReaderProps> = (args) => {
-  const [error, setError] = useState(null);
-  const [data, setData] = useState(null);
+export const Page = ({ ...props }: QrReaderProps) =>  {
+  const [error, setError] = useState<string>();
+  const [data, setData] = useState<Result>();
 
   return (
     <div style={styles.container}>
       <QrReader
-        {...args}
+        {...props}
         onResult={(result, error) => {
-          if (result) {
+          if (!!result) {
             setData(result);
           }
 
@@ -37,9 +41,9 @@ const Template: Story<QrReaderProps> = (args) => {
   );
 };
 
-export const ScanCode = Template.bind({});
+export const ScanCode = Page.bind({});
 
-ScanCode.args = {
+ScanCode.props = {
   ViewFinder,
   videoId: 'video',
   scanDelay: 500,
@@ -48,7 +52,20 @@ ScanCode.args = {
   },
 };
 
-export default {
-  title: 'Browser QR Reader',
-  component: QrReader,
-};
+const meta = {
+    title: 'Browser QR Reader',
+    component: Page,
+    parameters: {
+      // More on how to position stories at: https://storybook.js.org/docs/configure/story-layout
+      layout: 'fullscreen',
+    },
+} satisfies Meta<typeof Page>;
+
+export default meta;
+type Story = StoryObj<typeof meta>;
+
+export const FirstStory: Story = {
+    args: {
+      //👇 The args you need here will depend on your component
+    },
+  };
