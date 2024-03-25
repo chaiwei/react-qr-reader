@@ -20,23 +20,27 @@ const styles = {
 export const Page = ({ ...props }: QrReaderProps) =>  {
   const [error, setError] = useState<string>();
   const [data, setData] = useState<Result>();
+  const [toggleCamera, setToggleCamera] = useState<boolean>(false);
 
   return (
     <div style={styles.container}>
-      <QrReader
-        {...props}
-        onResult={(result, error) => {
-          if (!!result) {
-            setData(result);
-          }
+        {toggleCamera && (
+            <QrReader
+                {...props}
+                onResult={(result, error) => {
+                if (!!result) {
+                    setData(result);
+                }
 
-          if (error) {
-            setError(error.message);
-          }
-        }}
-      />
-      <p>The value is: {JSON.stringify(data, null, 2)}</p>
-      <p>The error is: {error}</p>
+                if (error) {
+                    setError(error.message);
+                }
+                }}
+            />
+        )}
+        <p>The value is: {JSON.stringify(data, null, 2)}</p>
+        <p>The error is: {error}</p>
+        <button onClick={() => setToggleCamera(!toggleCamera)}>{!toggleCamera? "Open" : "Close"} Scanner</button>
     </div>
   );
 };
