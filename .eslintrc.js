@@ -3,7 +3,7 @@ module.exports = {
     // ...
     'react-hooks',
   ],
-  extends: 'react-app',
+  extends: ['react-app', 'plugin:storybook/recommended'],
   rules: {
     'no-console': ['error', { allow: ['warn', 'error', 'info'] }],
     'no-debugger': 'error',
