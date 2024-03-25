@@ -45,7 +45,8 @@ export const useQrReader: UseQrReaderHook = ({
     }
 
     return () => {
-      controlsRef.current?.stop();
+        BrowserQRCodeReader.releaseAllStreams();
+        controlsRef.current?.stop();
     };
   }, []);
 };
