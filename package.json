@@ -1,6 +1,6 @@
 {
   "name": "@chaiwei/react-qr-reader",
-  "version": "3.0.0-beta-3",
+  "version": "3.0.0-beta-4",
   "description": "A React Component for reading QR codes from the webcam",
   "scripts": {
     "build": "rollup --config rollup.config.js --configPlugin typescript",
